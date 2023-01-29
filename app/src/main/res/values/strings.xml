@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">TestModuloTech</string>
+    <string name="error_message">Une erreur s\'est produite. Veuillez réessayer plus tard.</string>
+    <string name="retry">Réessayer</string>
+    <string name="name">Nom : %1$s</string>
+    <string name="type">Type : %1$s</string>
+    <string name="mode">Mode : %1$s</string>
+    <string name="intensity">Intensité : %1$d</string>
+    <string name="position">Position : %1$d</string>
+    <string name="temperature">Température : %1$.1f</string>
 </resources>

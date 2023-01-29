@@ -1,7 +1,8 @@
-package com.example.testmodulotech
+package com.example.testmodulotech.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.testmodulotech.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
