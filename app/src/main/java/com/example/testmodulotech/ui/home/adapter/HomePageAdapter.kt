@@ -23,6 +23,13 @@ class HomePageAdapter(private val onDeviceClick: ((Int) -> Unit)?) :
 
         holder.txtDeviceName?.text = context.getString(R.string.name, device.deviceName)
         holder.txtProductType?.text = context.getString(R.string.type, device.productType.value)
+
+        //Reset views visibility
+        holder.txtIntensity?.visibility = View.VISIBLE
+        holder.txtMode?.visibility = View.VISIBLE
+        holder.txtTemperature?.visibility = View.VISIBLE
+        holder.txtPosition?.visibility = View.VISIBLE
+
         when (device.productType) {
             ProductTypeEnum.LIGHT -> {
                 val light = device as Light
@@ -50,7 +57,6 @@ class HomePageAdapter(private val onDeviceClick: ((Int) -> Unit)?) :
         }
 
         holder.itemView.setOnClickListener { onDeviceClick?.invoke(device.id) }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceViewHolder {

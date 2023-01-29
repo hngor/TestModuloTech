@@ -13,6 +13,10 @@ class HomeLocalDataSource(private val db: TestModuloTechDB) {
         return db.devicesDao().getDevice(deviceId = deviceId)
     }
 
+    fun getFilteredDeviceList(productType: String): List<DeviceData> {
+        return db.devicesDao().getDevicesFromProductType(productTypeName = productType)
+    }
+
     fun addDevice(device: DeviceData) {
         db.devicesDao().insertDevice(device)
     }

@@ -5,12 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.testmodulotech.R
 import com.example.testmodulotech.databinding.FragmentHomePageBinding
 import com.example.testmodulotech.ui.home.adapter.HomePageAdapter
 import com.example.testmodulotech.ui.home.model.HomePageUiModel
+import com.example.testmodulotech.util.Constants
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomePageFragment : Fragment() {
@@ -39,6 +43,14 @@ class HomePageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnRetry.setOnClickListener { viewModel.getHomeData() }
+
+        val filtersAdapter = ArrayAdapter(requireContext(), R.layout.layout_filter_item, Constants.PRODUCT_TYPE_FILTER)
+        binding.autoCompleteTextView.setAdapter(filtersAdapter)
+        binding.autoCompleteTextView.setText(Constants.PRODUCT_TYPE_FILTER[0], false)
+        binding.autoCompleteTextView.setOnItemClickListener { _, _, _, _ ->
+            viewModel.getFilteredDeviceList(binding.autoCompleteTextView.text.toString())
+        }
+
 
         viewManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         val dividerItemDecoration = DividerItemDecoration(context, viewManager.orientation)

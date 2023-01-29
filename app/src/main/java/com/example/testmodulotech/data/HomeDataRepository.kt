@@ -2,6 +2,7 @@ package com.example.testmodulotech.data
 
 import com.example.testmodulotech.data.mapper.HomeInformationsMapper
 import com.example.testmodulotech.data.model.DeviceData
+import com.example.testmodulotech.data.model.HomeData
 import com.example.testmodulotech.domain.model.HomeInformations
 
 class HomeDataRepository(
@@ -27,4 +28,11 @@ class HomeDataRepository(
 
         return null
     }
+
+    suspend fun getFilteredDeviceList(productType: String): HomeInformations {
+        val devices = homeLocalDataSource.getFilteredDeviceList(productType = productType)
+        val homeData = HomeData(devices)
+        return homeInformationsMapper.toDomainMapper(homeData)
+    }
+
 }

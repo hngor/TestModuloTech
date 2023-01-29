@@ -8,4 +8,5 @@
     <string name="intensity">Intensité : %1$d</string>
     <string name="position">Position : %1$d</string>
     <string name="temperature">Température : %1$.1f</string>
+    <string name="filter">Filtre</string>
 </resources>

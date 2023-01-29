@@ -10,6 +10,9 @@ interface DevicesDao {
     @Query("SELECT * FROM ${Constants.DEVICES_TABLE_NAME}")
     fun getAllDevices(): List<DeviceData>
 
+    @Query("SELECT * FROM ${Constants.DEVICES_TABLE_NAME} WHERE productType=:productTypeName")
+    fun getDevicesFromProductType(productTypeName: String): List<DeviceData>
+
     @Query("SELECT * FROM ${Constants.DEVICES_TABLE_NAME} WHERE id=:deviceId")
     fun getDevice(deviceId: Int): DeviceData
 

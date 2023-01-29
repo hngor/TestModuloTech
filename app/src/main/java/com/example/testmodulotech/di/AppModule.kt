@@ -6,6 +6,7 @@ import com.example.testmodulotech.data.HomeLocalDataSource
 import com.example.testmodulotech.data.HomeRemoteDataSource
 import com.example.testmodulotech.data.dao.TestModuloTechDB
 import com.example.testmodulotech.data.mapper.HomeInformationsMapper
+import com.example.testmodulotech.domain.usecase.GetFilteredDeviceListUseCase
 import com.example.testmodulotech.domain.usecase.GetHomeInformationsUseCase
 import com.example.testmodulotech.ui.home.HomePageViewModel
 import com.example.testmodulotech.ui.home.mapper.HomePageUiMapper
@@ -27,12 +28,13 @@ val appModule = module {
             homeInformationsMapper = get()
         )
     }
-    single { GetHomeInformationsUseCase(get()) }
+    single { GetHomeInformationsUseCase(homeDataRepository = get()) }
+    single { GetFilteredDeviceListUseCase(homeDataRepository = get())}
 
     single { HomePageUiMapper() }
 
     viewModel {
-        HomePageViewModel(getHomeInformationsUseCase = get(), homePageUiMapper = get())
+        HomePageViewModel(getHomeInformationsUseCase = get(), getFilteredDeviceListUseCase = get(), homePageUiMapper = get())
     }
 
     single {
