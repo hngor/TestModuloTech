@@ -42,20 +42,27 @@ class HomePageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //Init click listeners
         binding.btnRetry.setOnClickListener { viewModel.getHomeData() }
 
-        val filtersAdapter = ArrayAdapter(requireContext(), R.layout.layout_filter_item, Constants.PRODUCT_TYPE_FILTER)
+        //Init filter view
+        val filtersAdapter = ArrayAdapter(
+            requireContext(),
+            R.layout.layout_filter_item,
+            Constants.PRODUCT_TYPE_FILTER
+        )
         binding.autoCompleteTextView.setAdapter(filtersAdapter)
         binding.autoCompleteTextView.setText(Constants.PRODUCT_TYPE_FILTER[0], false)
         binding.autoCompleteTextView.setOnItemClickListener { _, _, _, _ ->
             viewModel.getFilteredDeviceList(binding.autoCompleteTextView.text.toString())
         }
 
-
+        //Init recyclerview
         viewManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         val dividerItemDecoration = DividerItemDecoration(context, viewManager.orientation)
 
-        homePageAdapter = HomePageAdapter {  }
+        homePageAdapter = HomePageAdapter(onDeviceClick = { _ -> },
+            onDeleteDevice = { deviceId -> viewModel.deleteDevice(deviceId) })
 
         binding.recyclerDevices.apply {
             setHasFixedSize(true)
@@ -66,7 +73,7 @@ class HomePageFragment : Fragment() {
     }
 
     private fun updateUI(state: HomePageUiModel) {
-        when(state) {
+        when (state) {
             is HomePageUiModel.HomePageData -> showData(state)
             HomePageUiModel.HomePageError -> showError()
             HomePageUiModel.Loading -> {

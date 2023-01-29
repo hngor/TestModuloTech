@@ -35,4 +35,11 @@ class HomeDataRepository(
         return homeInformationsMapper.toDomainMapper(homeData)
     }
 
+    suspend fun deleteDevice(deviceId: Int): HomeInformations {
+        homeLocalDataSource.deleteDevice(deviceId = deviceId)
+        val devices = homeLocalDataSource.getAllDevices()
+        val homeData = HomeData(devices)
+        return homeInformationsMapper.toDomainMapper(homeData)
+    }
+
 }

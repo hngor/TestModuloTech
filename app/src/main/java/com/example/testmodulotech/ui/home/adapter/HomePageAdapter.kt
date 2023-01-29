@@ -3,6 +3,7 @@ package com.example.testmodulotech.ui.home.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testmodulotech.R
@@ -12,7 +13,10 @@ import com.example.testmodulotech.domain.model.Light
 import com.example.testmodulotech.domain.model.RollerShutter
 import com.example.testmodulotech.util.ProductTypeEnum
 
-class HomePageAdapter(private val onDeviceClick: ((Int) -> Unit)?) :
+class HomePageAdapter(
+    private val onDeviceClick: ((Int) -> Unit)?,
+    private val onDeleteDevice: ((Int) -> Unit)?
+) :
     RecyclerView.Adapter<DeviceViewHolder>() {
 
     internal var deviceList: List<Device> = listOf()
@@ -57,6 +61,7 @@ class HomePageAdapter(private val onDeviceClick: ((Int) -> Unit)?) :
         }
 
         holder.itemView.setOnClickListener { onDeviceClick?.invoke(device.id) }
+        holder.imgDelete?.setOnClickListener { onDeleteDevice?.invoke(device.id) }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceViewHolder {
@@ -76,4 +81,5 @@ class DeviceViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     var txtIntensity: TextView? = view.findViewById(R.id.txtIntensity)
     var txtPosition: TextView? = view.findViewById(R.id.txtPosition)
     var txtTemperature: TextView? = view.findViewById(R.id.txtTemperature)
+    var imgDelete: ImageView? = view.findViewById(R.id.imgDelete)
 }

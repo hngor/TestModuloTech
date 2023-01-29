@@ -1,6 +1,7 @@
 package com.example.testmodulotech.ui.home
 
 import androidx.lifecycle.viewModelScope
+import com.example.testmodulotech.domain.usecase.DeleteDeviceUseCase
 import com.example.testmodulotech.domain.usecase.GetFilteredDeviceListUseCase
 import com.example.testmodulotech.domain.usecase.GetHomeInformationsUseCase
 import com.example.testmodulotech.ui.home.mapper.HomePageUiMapper
@@ -11,6 +12,7 @@ import kotlinx.coroutines.launch
 class HomePageViewModel(
     private val getHomeInformationsUseCase: GetHomeInformationsUseCase,
     private val getFilteredDeviceListUseCase: GetFilteredDeviceListUseCase,
+    private val deleteDeviceUseCase: DeleteDeviceUseCase,
     private val homePageUiMapper: HomePageUiMapper
 ) : BaseViewModel<HomePageUiModel>() {
 
@@ -27,6 +29,13 @@ class HomePageViewModel(
             postData(HomePageUiModel.Loading)
             val homeData = getFilteredDeviceListUseCase(productType = productType)
             postData(homePageUiMapper.toUiMapper(homeData))
+        }
+    }
+
+    fun deleteDevice(deviceId: Int) {
+        viewModelScope.launch {
+            val homeData = deleteDeviceUseCase(deviceId)
+            postData((homePageUiMapper.toUiMapper(homeData)))
         }
     }
 }

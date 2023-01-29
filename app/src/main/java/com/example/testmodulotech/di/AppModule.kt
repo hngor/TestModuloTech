@@ -6,6 +6,7 @@ import com.example.testmodulotech.data.HomeLocalDataSource
 import com.example.testmodulotech.data.HomeRemoteDataSource
 import com.example.testmodulotech.data.dao.TestModuloTechDB
 import com.example.testmodulotech.data.mapper.HomeInformationsMapper
+import com.example.testmodulotech.domain.usecase.DeleteDeviceUseCase
 import com.example.testmodulotech.domain.usecase.GetFilteredDeviceListUseCase
 import com.example.testmodulotech.domain.usecase.GetHomeInformationsUseCase
 import com.example.testmodulotech.ui.home.HomePageViewModel
@@ -29,17 +30,25 @@ val appModule = module {
         )
     }
     single { GetHomeInformationsUseCase(homeDataRepository = get()) }
-    single { GetFilteredDeviceListUseCase(homeDataRepository = get())}
+    single { GetFilteredDeviceListUseCase(homeDataRepository = get()) }
+    single { DeleteDeviceUseCase(homeDataRepository = get()) }
 
     single { HomePageUiMapper() }
 
     viewModel {
-        HomePageViewModel(getHomeInformationsUseCase = get(), getFilteredDeviceListUseCase = get(), homePageUiMapper = get())
+        HomePageViewModel(
+            getHomeInformationsUseCase = get(),
+            getFilteredDeviceListUseCase = get(),
+            deleteDeviceUseCase = get(),
+            homePageUiMapper = get()
+        )
     }
 
     single {
-        Room.databaseBuilder(androidContext(),
-            TestModuloTechDB::class.java, Constants.DATABASE_NAME)
+        Room.databaseBuilder(
+            androidContext(),
+            TestModuloTechDB::class.java, Constants.DATABASE_NAME
+        )
             .build()
     }
 
