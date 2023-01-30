@@ -11,6 +11,10 @@ class Constants {
             ProductTypeEnum.ROLLERSHUTTER.value,
             ProductTypeEnum.LIGHT.value
         )
+
+        const val MODE_ON = "ON"
+        const val MODE_OFF = "OFF"
+
         const val DATABASE_NAME = "testModuloTechDB"
 
         //database version

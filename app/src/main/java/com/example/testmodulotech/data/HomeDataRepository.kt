@@ -1,14 +1,17 @@
 package com.example.testmodulotech.data
 
+import com.example.testmodulotech.data.mapper.DeviceMapper
 import com.example.testmodulotech.data.mapper.HomeInformationsMapper
 import com.example.testmodulotech.data.model.DeviceData
 import com.example.testmodulotech.data.model.HomeData
+import com.example.testmodulotech.domain.model.Device
 import com.example.testmodulotech.domain.model.HomeInformations
 
 class HomeDataRepository(
     private val homeRemoteDataSource: HomeRemoteDataSource,
     private val homeLocalDataSource: HomeLocalDataSource,
-    private val homeInformationsMapper: HomeInformationsMapper
+    private val homeInformationsMapper: HomeInformationsMapper,
+    private val deviceMapper: DeviceMapper
 ) {
 
     suspend fun getHomeData(): HomeInformations?{
@@ -27,6 +30,11 @@ class HomeDataRepository(
         }
 
         return null
+    }
+
+    suspend fun getDevice(deviceId: Int): Device? {
+        val device = homeLocalDataSource.getDevice(deviceId = deviceId)
+        return deviceMapper.toDomainMapper(device)
     }
 
     suspend fun getFilteredDeviceList(productType: String): HomeInformations {

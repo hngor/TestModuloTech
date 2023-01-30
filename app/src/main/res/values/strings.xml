@@ -4,9 +4,15 @@
     <string name="retry">Réessayer</string>
     <string name="name">Nom : %1$s</string>
     <string name="type">Type : %1$s</string>
-    <string name="mode">Mode : %1$s</string>
-    <string name="intensity">Intensité : %1$d</string>
-    <string name="position">Position : %1$d</string>
-    <string name="temperature">Température : %1$.1f</string>
+    <string name="mode_text">Mode : %1$s</string>
+    <string name="mode_label">Mode</string>
+    <string name="intensity_text">Intensité : %1$d</string>
+    <string name="intensity_label">Intensité</string>
+    <string name="position_text">Position : %1$d</string>
+    <string name="position_label">Position</string>
+    <string name="temperature_text">Température : %1$.1f</string>
+    <string name="temperature_label">Température</string>
     <string name="filter">Filtre</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="not_supported_device">Appareil non pris en charge</string>
 </resources>

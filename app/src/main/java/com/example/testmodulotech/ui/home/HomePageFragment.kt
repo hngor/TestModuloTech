@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -61,8 +62,10 @@ class HomePageFragment : Fragment() {
         viewManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         val dividerItemDecoration = DividerItemDecoration(context, viewManager.orientation)
 
-        homePageAdapter = HomePageAdapter(onDeviceClick = { _ -> },
-            onDeleteDevice = { deviceId -> viewModel.deleteDevice(deviceId) })
+        homePageAdapter = HomePageAdapter(
+            onDeviceClick = { deviceId -> navigateToDeviceSteeringFragment(deviceId = deviceId) },
+            onDeleteDevice = { deviceId -> viewModel.deleteDevice(deviceId) }
+        )
 
         binding.recyclerDevices.apply {
             setHasFixedSize(true)
@@ -104,5 +107,10 @@ class HomePageFragment : Fragment() {
 
     private fun hideProgressBar() {
         binding.layoutProgressBarHome.visibility = View.GONE
+    }
+
+    private fun navigateToDeviceSteeringFragment(deviceId: Int) {
+        val action = HomePageFragmentDirections.navigateToDeviceSteeringFragment(deviceId)
+        findNavController().navigate(action)
     }
 }

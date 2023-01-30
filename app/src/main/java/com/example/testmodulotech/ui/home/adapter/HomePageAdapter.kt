@@ -37,24 +37,24 @@ class HomePageAdapter(
         when (device.productType) {
             ProductTypeEnum.LIGHT -> {
                 val light = device as Light
-                holder.txtIntensity?.text = context.getString(R.string.intensity, light.intensity)
-                holder.txtMode?.text = context.getString(R.string.mode, light.mode)
+                holder.txtIntensity?.text = context.getString(R.string.intensity_text, light.intensity)
+                holder.txtMode?.text = context.getString(R.string.mode_text, light.mode)
                 holder.txtTemperature?.visibility = View.GONE
                 holder.txtPosition?.visibility = View.GONE
             }
             ProductTypeEnum.ROLLERSHUTTER -> {
                 val rollerShutter = device as RollerShutter
                 holder.txtPosition?.text =
-                    context.getString(R.string.position, rollerShutter.position)
+                    context.getString(R.string.position_text, rollerShutter.position)
                 holder.txtIntensity?.visibility = View.GONE
                 holder.txtMode?.visibility = View.GONE
                 holder.txtTemperature?.visibility = View.GONE
             }
             ProductTypeEnum.HEATER -> {
                 val heater = device as Heater
-                holder.txtMode?.text = context.getString(R.string.mode, heater.mode)
+                holder.txtMode?.text = context.getString(R.string.mode_text, heater.mode)
                 holder.txtTemperature?.text =
-                    context.getString(R.string.temperature, heater.temperature.toFloat())
+                    context.getString(R.string.temperature_text, heater.temperature.toFloat())
                 holder.txtPosition?.visibility = View.GONE
                 holder.txtIntensity?.visibility = View.GONE
             }

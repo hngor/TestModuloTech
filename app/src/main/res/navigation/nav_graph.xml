@@ -9,5 +9,18 @@
         android:id="@+id/homePageFragment"
         android:name="com.example.testmodulotech.ui.home.HomePageFragment"
         android:label="fragment_home_page"
-        tools:layout="@layout/fragment_home_page" />
+        tools:layout="@layout/fragment_home_page" >
+        <action
+            android:id="@+id/navigate_to_deviceSteeringFragment"
+            app:destination="@id/deviceSteeringFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/deviceSteeringFragment"
+        android:name="com.example.testmodulotech.ui.devicesteering.DeviceSteeringFragment"
+        android:label="fragment_device_steering"
+        tools:layout="@layout/fragment_device_steering" >
+        <argument
+            android:name="deviceId"
+            app:argType="integer" />
+    </fragment>
 </navigation>
