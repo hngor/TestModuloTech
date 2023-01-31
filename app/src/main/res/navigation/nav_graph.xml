@@ -13,6 +13,9 @@
         <action
             android:id="@+id/navigate_to_deviceSteeringFragment"
             app:destination="@id/deviceSteeringFragment" />
+        <action
+            android:id="@+id/navigate_to_myAccountFragment"
+            app:destination="@id/myAccountFragment" />
     </fragment>
     <fragment
         android:id="@+id/deviceSteeringFragment"
@@ -23,4 +26,9 @@
             android:name="deviceId"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/myAccountFragment"
+        android:name="com.example.testmodulotech.ui.myaccount.MyAccountFragment"
+        android:label="fragment_my_account"
+        tools:layout="@layout/fragment_my_account" />
 </navigation>

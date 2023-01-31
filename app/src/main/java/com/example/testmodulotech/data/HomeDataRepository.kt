@@ -4,6 +4,8 @@ import com.example.testmodulotech.data.mapper.DeviceMapper
 import com.example.testmodulotech.data.mapper.HomeInformationsMapper
 import com.example.testmodulotech.data.model.DeviceData
 import com.example.testmodulotech.data.model.HomeData
+import com.example.testmodulotech.data.model.UserData
+import com.example.testmodulotech.data.model.UserEntity
 import com.example.testmodulotech.domain.model.Device
 import com.example.testmodulotech.domain.model.HomeInformations
 
@@ -26,10 +28,22 @@ class HomeDataRepository(
                 //store device in local database
                 homeLocalDataSource.addDevice(device)
             }
+
+            //store user data in local database
+            homeLocalDataSource.addUser(homeRemoteData.user)
+
             return homeInformationsMapper.toDomainMapper(homeRemoteData)
         }
 
         return null
+    }
+
+    suspend fun getUser(): UserData {
+        return homeLocalDataSource.getUser()
+    }
+
+    suspend fun saveUser(userEntity: UserEntity) {
+        homeLocalDataSource.updateUser(userEntity)
     }
 
     suspend fun getDevice(deviceId: Int): Device? {
@@ -39,14 +53,14 @@ class HomeDataRepository(
 
     suspend fun getFilteredDeviceList(productType: String): HomeInformations {
         val devices = homeLocalDataSource.getFilteredDeviceList(productType = productType)
-        val homeData = HomeData(devices)
+        val homeData = HomeData(devices, homeLocalDataSource.getUser())
         return homeInformationsMapper.toDomainMapper(homeData)
     }
 
     suspend fun deleteDevice(deviceId: Int): HomeInformations {
         homeLocalDataSource.deleteDevice(deviceId = deviceId)
         val devices = homeLocalDataSource.getAllDevices()
-        val homeData = HomeData(devices)
+        val homeData = HomeData(devices, homeLocalDataSource.getUser())
         return homeInformationsMapper.toDomainMapper(homeData)
     }
 

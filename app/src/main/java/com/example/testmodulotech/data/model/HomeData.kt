@@ -1,5 +1,6 @@
 package com.example.testmodulotech.data.model
 
 data class HomeData(
-    val devices: List<DeviceData>
+    val devices: List<DeviceData>,
+    val user: UserData
 )

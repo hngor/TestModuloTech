@@ -46,6 +46,18 @@ class HomePageFragment : Fragment() {
         //Init click listeners
         binding.btnRetry.setOnClickListener { viewModel.getHomeData() }
 
+        //Init toolbar
+        binding.toolbarHomePage.inflateMenu(R.menu.menu_homepage)
+        binding.toolbarHomePage .setOnMenuItemClickListener { listener ->
+            when (listener.itemId) {
+                R.id.action_myaccount -> {
+                    val action = HomePageFragmentDirections.navigateToMyAccountFragment()
+                    findNavController().navigate(action)
+                }
+            }
+            true
+        }
+
         //Init filter view
         val filtersAdapter = ArrayAdapter(
             requireContext(),

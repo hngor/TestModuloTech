@@ -7,14 +7,13 @@ import com.example.testmodulotech.data.HomeRemoteDataSource
 import com.example.testmodulotech.data.dao.TestModuloTechDB
 import com.example.testmodulotech.data.mapper.DeviceMapper
 import com.example.testmodulotech.data.mapper.HomeInformationsMapper
-import com.example.testmodulotech.domain.usecase.DeleteDeviceUseCase
-import com.example.testmodulotech.domain.usecase.GetDeviceUseCase
-import com.example.testmodulotech.domain.usecase.GetFilteredDeviceListUseCase
-import com.example.testmodulotech.domain.usecase.GetHomeInformationsUseCase
+import com.example.testmodulotech.domain.usecase.*
 import com.example.testmodulotech.ui.devicesteering.DeviceSteeringViewModel
 import com.example.testmodulotech.ui.devicesteering.mapper.DeviceSteeringUiMapper
 import com.example.testmodulotech.ui.home.HomePageViewModel
 import com.example.testmodulotech.ui.home.mapper.HomePageUiMapper
+import com.example.testmodulotech.ui.myaccount.MyAccountViewModel
+import com.example.testmodulotech.ui.myaccount.mapper.MyAccountUiMapper
 import com.example.testmodulotech.util.Constants
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -39,9 +38,12 @@ val appModule = module {
     single { GetFilteredDeviceListUseCase(homeDataRepository = get()) }
     single { DeleteDeviceUseCase(homeDataRepository = get()) }
     single { GetDeviceUseCase(homeDataRepository = get()) }
+    single { GetUserUseCase(homeDataRepository = get()) }
+    single { SaveUserInformationsUseCase(homeDataRepository = get()) }
 
     single { HomePageUiMapper() }
     single { DeviceSteeringUiMapper() }
+    single { MyAccountUiMapper() }
 
     viewModel {
         HomePageViewModel(
@@ -54,6 +56,10 @@ val appModule = module {
 
     viewModel {
         DeviceSteeringViewModel(getDeviceUseCase = get(), deviceSteeringUiMapper = get())
+    }
+
+    viewModel {
+        MyAccountViewModel(getUserUseCase = get(), myAccountUiMapper = get(), saveUserInformationsUseCase = get())
     }
 
     single {

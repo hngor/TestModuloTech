@@ -22,5 +22,6 @@ class Constants {
 
         //database table names
         const val DEVICES_TABLE_NAME = "devices"
+        const val USER_TABLE_NAME = "user"
     }
 }
