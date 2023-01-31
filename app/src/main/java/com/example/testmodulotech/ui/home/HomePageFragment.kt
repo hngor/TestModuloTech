@@ -29,7 +29,6 @@ class HomePageFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.data.observe(this) { state -> updateUI(state) }
-        viewModel.getHomeData()
     }
 
     override fun onCreateView(
@@ -85,6 +84,11 @@ class HomePageFragment : Fragment() {
             adapter = homePageAdapter
         }
         binding.recyclerDevices.addItemDecoration(dividerItemDecoration)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getHomeData()
     }
 
     private fun updateUI(state: HomePageUiModel) {
